@@ -40,7 +40,6 @@ public class ScrollFragment extends Fragment {
 
         // Определение LayoutManager для компановки элементов
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
-       // recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         numberArrayList = new ArrayList<>();
         recyclerView.setAdapter(new NumberAdapter(getContext(), numberArrayList));
 
