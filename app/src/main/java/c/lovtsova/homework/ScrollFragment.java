@@ -1,31 +1,34 @@
 package c.lovtsova.homework;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class ScrollFragment extends Fragment {
 
+    public static final String TAG = "ScrollFragment";
     private RecyclerView recyclerView;
     private NumberAdapter adapter;
     private ArrayList<Number> numberArrayList;
 
+    public static Fragment newInstance() {
+        return new ScrollFragment();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Context context = getActivity().getApplicationContext();
-        LinearLayout layout = new LinearLayout(context);
 
-        return layout;
+        return inflater.inflate(R.layout.fragment,container,false);
     }
 
     @Override
@@ -36,12 +39,12 @@ public class ScrollFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
 
         // Определение LayoutManager для компановки элементов
-        recyclerView.setLayoutManager(new GridLayoutManager(this.getActivity(), 3));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
+       // recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         numberArrayList = new ArrayList<>();
+        recyclerView.setAdapter(new NumberAdapter(getContext(), numberArrayList));
 
         // Создание адаптера
-        adapter = new NumberAdapter(this.getActivity(), numberArrayList);
-        recyclerView.setAdapter(adapter);
         createListData();
     }
 

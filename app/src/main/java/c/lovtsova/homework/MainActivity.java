@@ -2,6 +2,7 @@ package c.lovtsova.homework;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -19,17 +20,24 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (savedInstanceState == null) {
+
             // получаем экземпляр FragmentTransaction
             mFragmentManager = getFragmentManager();
-            mFragmentTransaction = mFragmentManager.beginTransaction();
 
+
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
+        if (currentFragment == null || !(currentFragment instanceof ScrollFragment))
+            replaceFragment(ScrollFragment.newInstance(), ScrollFragment.TAG);
             // добавляем фрагмент
-            ScrollFragment myFragment = new ScrollFragment();
-            mFragmentTransaction.add(R.id.container, myFragment);
-            mFragmentTransaction.commit();
-        }
 
+
+
+    }
+    public void replaceFragment(Fragment fragment, String tag) {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, fragment, tag)
+                .addToBackStack(tag)
+                .commit();
     }
 
     //public void addNewElement(View v) {
