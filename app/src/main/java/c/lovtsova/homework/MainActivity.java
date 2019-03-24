@@ -26,9 +26,7 @@ public class MainActivity extends AppCompatActivity implements BaseCallback {
         if (currentFragment == null || !(currentFragment instanceof ScrollFragment))
             replaceFragment(ScrollFragment.newInstance(), ScrollFragment.TAG);
         // добавляем фрагмент
-
-
-    }
+           }
 
     public void replaceFragment(Fragment fragment, String tag) {
         getSupportFragmentManager().beginTransaction()

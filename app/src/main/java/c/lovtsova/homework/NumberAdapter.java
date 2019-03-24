@@ -21,6 +21,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
     private Context context;
     private ArrayList<Number> numbers;
     private BaseCallback mCallback;
+    private View view;
 
 
     public NumberAdapter(Context context, ArrayList<Number> numbers) {
@@ -33,26 +34,28 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
     // Вызывается, когда кастомный ViewHolder должен быть инициализирован
     @NonNull
     @Override
-    public NumberHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public NumberHolder onCreateViewHolder(@NonNull final ViewGroup viewGroup,int i) {
         // С помощью inflate заполняем макет
-        View view = LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false);
+        view = LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false);
         // Вызываем конструктор ViewHolden
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i("FAAAK","simd");
-                mCallback.replaceFragmentUserAgr(WindowFragment.newInstance(), WindowFragment.TAG);
 
-            }
-        });
         return new NumberHolder(view);
     }
 
     // Определение содержания каждого элемента
     @Override
-    public void onBindViewHolder(@NonNull NumberHolder numberHolder, int i) {
+    public void onBindViewHolder(@NonNull final NumberHolder numberHolder, int i) {
         Number number = numbers.get(i);
         numberHolder.setDetails(number);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("FAAAK","simd");
+                mCallback.replaceFragmentUserAgr(WindowFragment.newInstance(numbers.
+                        get(numberHolder.getAdapterPosition())), WindowFragment.TAG);
+
+            }
+        });
 
     }
 
