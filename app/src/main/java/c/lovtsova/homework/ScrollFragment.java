@@ -1,17 +1,14 @@
 package c.lovtsova.homework;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
@@ -60,7 +57,8 @@ public class ScrollFragment extends Fragment {
     }
 
     private void createListData() {
-        for (int i = 0; i < 10; i++) {
+        int num = ((MainActivity)getActivity()).getData();
+        for (int i = 0; i < num; i++) {
             numberArrayList.add(new Number(i));
         }
     }
@@ -69,5 +67,6 @@ public class ScrollFragment extends Fragment {
     public void addNewElement() {
         numberArrayList.add(new Number(adapter.getItemCount()));
         adapter.notifyItemInserted(numberArrayList.size() - 1);
+        ((MainActivity)getActivity()).setData(numberArrayList.size());
     }
 }
