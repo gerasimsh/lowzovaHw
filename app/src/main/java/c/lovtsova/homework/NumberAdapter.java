@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,14 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
 
     private Context context;
     private ArrayList<Number> numbers;
+    private BaseCallback mCallback;
+
 
     public NumberAdapter(Context context, ArrayList<Number> numbers) {
+
         this.context = context;
         this.numbers = numbers;
+        this.mCallback= (BaseCallback) context;
     }
 
     // Вызывается, когда кастомный ViewHolder должен быть инициализирован
@@ -35,6 +40,8 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("FAAAK","simd");
+                mCallback.replaceFragmentUserAgr(WindowFragment.newInstance(), WindowFragment.TAG);
 
             }
         });

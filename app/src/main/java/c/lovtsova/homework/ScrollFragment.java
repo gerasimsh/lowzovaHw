@@ -21,7 +21,6 @@ public class ScrollFragment extends Fragment {
     private RecyclerView recyclerView;
     private NumberAdapter adapter;
     private ArrayList<Number> numberArrayList;
-    private BaseCallback mCallback;
     private Button mButton;
 
     public static Fragment newInstance() {
@@ -47,7 +46,6 @@ public class ScrollFragment extends Fragment {
 
         adapter = new NumberAdapter(getContext(), numberArrayList);
         recyclerView.setAdapter(adapter);
-        mCallback.replaceFragmentUserAgr(WindowFragment.newInstance(), WindowFragment.TAG);
         // Создание адаптера
         createListData();
         mButton = (Button) view.findViewById(R.id.btnAdd);
@@ -67,11 +65,6 @@ public class ScrollFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        this.mCallback = (BaseCallback) context;
-    }
 
     public void addNewElement() {
         numberArrayList.add(new Number(adapter.getItemCount()));

@@ -19,18 +19,17 @@ public class MainActivity extends AppCompatActivity implements BaseCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-            // получаем экземпляр FragmentTransaction
-
+        // получаем экземпляр FragmentTransaction
 
 
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
         if (currentFragment == null || !(currentFragment instanceof ScrollFragment))
             replaceFragment(ScrollFragment.newInstance(), ScrollFragment.TAG);
-            // добавляем фрагмент
-
+        // добавляем фрагмент
 
 
     }
+
     public void replaceFragment(Fragment fragment, String tag) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment, tag)
@@ -41,6 +40,6 @@ public class MainActivity extends AppCompatActivity implements BaseCallback {
 
     @Override
     public void replaceFragmentUserAgr(Fragment fragment, String tag) {
-
+        replaceFragment(fragment, tag);
     }
 }
