@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class ScrollFragment extends Fragment {
     private RecyclerView recyclerView;
     private NumberAdapter adapter;
     private ArrayList<Number> numberArrayList;
+    private BaseCallback mCallback;
+    private Button mButton;
 
     public static Fragment newInstance() {
         return new ScrollFragment();
@@ -28,7 +31,7 @@ public class ScrollFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment,container,false);
+        return inflater.inflate(R.layout.fragment, container, false);
     }
 
     @Override
@@ -41,15 +44,37 @@ public class ScrollFragment extends Fragment {
         // Определение LayoutManager для компановки элементов
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         numberArrayList = new ArrayList<>();
-        recyclerView.setAdapter(new NumberAdapter(getContext(), numberArrayList));
 
+        adapter = new NumberAdapter(getContext(), numberArrayList);
+        recyclerView.setAdapter(adapter);
+        mCallback.replaceFragmentUserAgr(WindowFragment.newInstance(), WindowFragment.TAG);
         // Создание адаптера
         createListData();
+        mButton = (Button) view.findViewById(R.id.btnAdd);
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewElement();
+            }
+        });
+
+
     }
 
     private void createListData() {
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             numberArrayList.add(new Number(i));
         }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.mCallback = (BaseCallback) context;
+    }
+
+    public void addNewElement() {
+        numberArrayList.add(new Number(adapter.getItemCount()));
+        adapter.notifyItemInserted(numberArrayList.size() - 1);
     }
 }

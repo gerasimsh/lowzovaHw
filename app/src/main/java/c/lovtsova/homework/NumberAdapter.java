@@ -31,7 +31,13 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
     public NumberHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         // С помощью inflate заполняем макет
         View view = LayoutInflater.from(context).inflate(R.layout.item, viewGroup, false);
-        // Вызываем конструктор ViewHolder
+        // Вызываем конструктор ViewHolden
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return new NumberHolder(view);
     }
 
@@ -40,6 +46,7 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
     public void onBindViewHolder(@NonNull NumberHolder numberHolder, int i) {
         Number number = numbers.get(i);
         numberHolder.setDetails(number);
+
     }
 
     // Возвращает кол-во элементов, присутствующих в данных
@@ -47,4 +54,6 @@ public class NumberAdapter extends RecyclerView.Adapter<NumberHolder> {
     public int getItemCount() {
         return numbers.size();
     }
+
+
 }

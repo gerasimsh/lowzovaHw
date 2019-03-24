@@ -11,10 +11,8 @@ import android.view.View;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BaseCallback {
 
-    private FragmentManager mFragmentManager;
-    private FragmentTransaction mFragmentTransaction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
             // получаем экземпляр FragmentTransaction
-            mFragmentManager = getFragmentManager();
+
 
 
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.container);
@@ -40,9 +38,9 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    //public void addNewElement(View v) {
-    //    numberArrayList.add(new Number(adapter.getItemCount()));
-    //    adapter.notifyItemInserted(numberArrayList.size() - 1);
-    //w}
 
+    @Override
+    public void replaceFragmentUserAgr(Fragment fragment, String tag) {
+
+    }
 }
