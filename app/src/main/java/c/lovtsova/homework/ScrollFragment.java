@@ -63,10 +63,15 @@ public class ScrollFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        ((MainActivity)getActivity()).setData(numberArrayList.size());
+    }
 
     public void addNewElement() {
         numberArrayList.add(new Number(adapter.getItemCount()));
         adapter.notifyItemInserted(numberArrayList.size() - 1);
-        ((MainActivity)getActivity()).setData(numberArrayList.size());
+
     }
 }

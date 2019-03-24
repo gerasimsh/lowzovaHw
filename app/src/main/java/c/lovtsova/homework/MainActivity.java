@@ -12,6 +12,9 @@ public class MainActivity extends AppCompatActivity implements BaseCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState!=null){
+            data = savedInstanceState.getInt("ahaha");
+        }
 
         // получаем экземпляр FragmentTransaction
 
@@ -28,6 +31,12 @@ public class MainActivity extends AppCompatActivity implements BaseCallback {
                 .replace(R.id.container, fragment, tag)
                 .addToBackStack(tag)
                 .commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt("ahaha",data);
     }
 
 
